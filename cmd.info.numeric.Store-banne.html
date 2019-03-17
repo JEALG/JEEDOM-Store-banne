@@ -1,0 +1,84 @@
+<div style="padding:0;width:110px;min-height:118px;" class="cmd tooltips cmd-widget cursor container-fluid #history# " data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
+ 	<!-- Info Widget
+		Basé sur les widget de 	: breizh33
+		Mise à jour 		: JAG 20190130 : Ajout possibilité de changer l'image et de fonctionner de 0 à 100 ou de 100 à 0 et correction du niveau 10 absent
+		Mise à jour		: JAG 20190317 : ajout centrer widget (merci à Antoinekl1)
+	-->
+	<center>
+	<div class="row">
+		<div class="cmdName" id="cmdName#id#" style="font-weight: bold;font-size : 10px; #hideCmdName#;">#name_display# </div>
+		<div style="font-size: 2.5em;margin-top:5px;" class="iconCmd"></div>
+      	<div style="vertical-align: middle; text-align: center; margin-top: 0px; font-size: 12px; height: 18px;">#state##unite#</div>
+      	<!-- Historique -->
+      		<div style="#displayHistory# font-size : 10px;margin-top:0px;">
+      			<span title="Min" class="tooltips">#minHistoryValue##unite#</span>|<span title="Max" class="tooltips">#maxHistoryValue##unite#</span> <i class="#tendance#"></i>
+      		</div>
+	</div>
+	</center>
+ 	<script>
+		// Options de personnalisation avec valeur par defaut
+          // Paramètre "sizehw" : à déclarer en pixels - 80 maxi
+              	var srcImgHeight 	= (is_numeric('#sizeh#')) 	? parseFloat('#sizeh#') 	: 60;
+              	var srcImgWidth		= (is_numeric('#sizew#')) 	? parseFloat('#sizew#') 	: 100;
+          // Paramétrage Niveau
+				var srcImgLevel		= (is_numeric('#levelINV#')) 	? parseFloat('#levelINV#') 	: 0;	
+        // Paramétrage des images
+              	var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.numeric.Store-banne/';
+      			var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "StoreExt_";
+      // Update
+			var iconUpdate = function (state){
+                $('.cmd[data-cmd_uid=#uid#] .iconCmd').empty();
+                if (state == 0 ) {
+                    level 		= 0;
+                  	levelINV 	= 100;
+                } else if (state > 0  && state <= 10 ) {
+                    level 		= 10;
+                  	levelINV 	= 90;
+                } else if (state > 10 && state <= 20) {
+                    level 		= 20;
+                  	levelINV 	= 80;
+                } else if (state > 20 && state <= 30) {
+                    level 		= 30;
+                  	levelINV 	= 70;
+                } else if (state > 30 && state <= 40) {
+                  	level 		= 40;
+                  	levelINV 	= 60;
+                } else if (state > 40 && state <= 50 ) {
+                  	level 		= 50;
+                  	levelINV 	= 50;
+                } else if (state > 50 && state <= 60) {
+                  	level 		= 60;
+                  	levelINV 	= 40;
+                } else if (state > 60 && state <= 70) {
+                  	level 		= 70;
+                  	levelINV 	= 30;
+                } else if (state > 70 && state <= 80) {
+                  	level 		= 80;
+                  	levelINV 	= 20;
+                } else if (state > 80 && state <= 90) {
+                  	level 		= 90;
+                  	levelINV 	= 10;
+                } else if (state > 90 && state <= 100) {
+                  	level 		= 100;
+                  	levelINV 	= 0;
+                } else {
+                  	level 		= 0;
+                  	levelINV 	= 100;
+                }
+              	// Update Value or img
+              		if (srcImgLevel == 1 ) {
+                      	var srcImglogoLevel = srcImgURL + srcImglogo +levelINV;
+                    } else {
+                      	var srcImglogoLevel = srcImgURL + srcImglogo +level;
+                    } 
+                   $('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImglogoLevel+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">'); 
+
+			$('.cmd[data-cmd_uid=#uid#] .state').text(state);
+			};
+	jeedom.cmd.update['#id#'] = function(_options){
+		$('.cmd[data-cmd_uid=#uid#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate)
+		iconUpdate(_options.display_value);
+	}
+	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});
+	</script>
+</div>
