@@ -22,13 +22,14 @@
 		jeedom.cmd.update['#id#'] = function(_options){
 			// Options de personnalisation avec valeur par defaut
 				// Paramètre "sizehw" : à déclarer en pixels - 80 maxi
-              		var srcImgHeight 	= (is_numeric('#sizeh#')) 	? parseFloat('#sizeh#') 	: 90;
-              		var srcImgWidth		= (is_numeric('#sizew#')) 	? parseFloat('#sizew#') 	: 90;
+              				var srcImgHeight 	= (is_numeric('#sizeh#')) 	? parseFloat('#sizeh#') 	: 90;
+              				var srcImgWidth		= (is_numeric('#sizew#')) 	? parseFloat('#sizew#') 	: 90;
           	// Paramétrage Niveau
-				var srcImgLevel		= (is_numeric('#levelINV#')) 	? parseFloat('#levelINV#') 	: 0;	
+					var srcImgLevel		= (is_numeric('#levelINV#')) 	? parseFloat('#levelINV#') 	: 0;	
           	// Paramétrage des images
-              	var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.numeric.Store-banne/';
-      			var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "StoreExt_";
+              				var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.numeric.Store-banne/';
+      					var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "StoreExt_";
+					var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "oups";
           		// Variable Image
           			var srcPictureID;
           			var srcPictureIDinv;
@@ -69,17 +70,21 @@
                         srcPictureID 	= "100";
                       	srcPictureIDinv = "0";
                     } else {
-                        srcPictureID 	= "0";
-                      	srcPictureIDinv = "100";
+                        srcPictureID 	= "error";
                     }          
-          // Update en fonction level
-              		if (srcImgLevel == 1 ) {
-                      	var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureIDinv;
-                    } else {
-                      	var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureID;
-                    } 
-          	// Update Value or img
-            	    $('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImglogoLevel+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+
+          	// Update IMG + gestion erreur
+          		if (srcPictureID == "error"){
+                   		$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+                    	} else {
+                        	// Update en fonction level
+              				if (srcImgLevel == 1 ) {
+                      				var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureIDinv;
+                    			} else {
+                      				var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureID;
+                    			} 
+                      			$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImglogoLevel+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+            	    	}
             	    $('.cmd[data-cmd_uid=#uid#] .label-info').html(State+'#unite#');
 		     		$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
 		}
