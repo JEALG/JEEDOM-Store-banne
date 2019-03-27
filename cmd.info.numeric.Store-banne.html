@@ -1,9 +1,9 @@
 <div style="padding:0;width:110px;min-height:118px;" class="cmd tooltips cmd-widget cursor container-fluid #history# " data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
  	<!-- Info Widget
 		Basé sur les widget de 	: breizh33
-		Mise à jour 		: JAG 20190130 : Ajout possibilité de changer l'image et de fonctionner de 0 à 100 ou de 100 à 0 et correction du niveau 10 absent
-		Mise à jour			: JAG 20190317 : ajout centrer widget (merci à Antoinekl1)
-		Mise à jour			: JAG 20190320 : Correction BUG actualisation des données
+		Mise à jour 				: JAG 20190130 : Ajout possibilité de changer l'image et de fonctionner de 0 à 100 ou de 100 à 0 et correction du niveau 10 absent
+		Mise à jour				: JAG 20190317 : ajout centrer widget (merci à Antoinekl1)
+		Mise à jour				: JAG 20190327 : Amélioration code Ajout variable pour définir l'extension du fichier (merci à fishes)
 	-->
 	<center>
 	<div class="row">
@@ -25,11 +25,18 @@
               				var srcImgHeight 	= (is_numeric('#sizeh#')) 	? parseFloat('#sizeh#') 	: 90;
               				var srcImgWidth		= (is_numeric('#sizew#')) 	? parseFloat('#sizew#') 	: 90;
           	// Paramétrage Niveau
-					var srcImgLevel		= (is_numeric('#levelINV#')) 	? parseFloat('#levelINV#') 	: 0;	
+							var srcImgLevel		= (is_numeric('#levelINV#')) 	? parseFloat('#levelINV#') 	: 0;	
+          	// Affichage durée changement dernier etat
+          				var srcImglogoTime		= ('#logoTime#'!='#'+'logoTime#') 	? "#logoErreur#": "X"
           	// Paramétrage des images
               				var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.numeric.Store-banne/';
-      					var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "StoreExt_";
-					var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "oups";
+              			// Paramètrage du logo		  	  
+							var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "StoreExt_";
+			  				var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";	
+              			// Paramètrage du logo Erreur	
+			  				var srcImglogoER		= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "oups";
+			  				var srcImglogoER_T 	= ('#logoER_type#'!='#'+'logoER_type#') ? "#logoER_type#" : "png";
+
           		// Variable Image
           			var srcPictureID;
           			var srcPictureIDinv;
@@ -75,7 +82,7 @@
 
           	// Update IMG + gestion erreur
           		if (srcPictureID == "error"){
-                   		$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+                   		$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER+ +'.'+ srcImglogoER_T+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
                     	} else {
                         	// Update en fonction level
               				if (srcImgLevel == 1 ) {
@@ -83,10 +90,15 @@
                     			} else {
                       				var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureID;
                     			} 
-                      			$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImglogoLevel+ '.png" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
+                      			$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImglogoLevel+ +'.'+ srcImglogo_T+'" style="height:' + srcImgHeight +'px;width:' + srcImgWidth +'px;">');
             	    	}
             	    $('.cmd[data-cmd_uid=#uid#] .label-info').html(State+'#unite#');
 		     		$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+		     		// Derniere durée changement dernier etat
+						if (srcImglogoTime == "X") {
+  							jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
+      					}
+		     		
 		}
 		jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});      
 
