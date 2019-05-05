@@ -111,7 +111,7 @@
 				$('.cmd[data-cmd_id=#id#] .label-time#id#').empty().html(srcformat+'<br>'+srctime);
 			} else if (srcImglogoTime == "heure") {
 				var srcdate = new Date(_options.valueDate);
-				var srctime = "à "+date.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
+				var srctime = "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
 				$('.cmd[data-cmd_id=#id#] .label-time#id#').empty().html(srctime);
 			};
 		
