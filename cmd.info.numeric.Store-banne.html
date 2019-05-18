@@ -9,7 +9,7 @@
 	<div class="row">
 		<center>
 			<div class="cmdName" id="cmdName#id#" style="font-weight: bold;font-size : 10px; #hideCmdName#;">#name_display# </div>
-			<div style="font-size: 2.5em;margin-top:5px;" class="iconCmd"></div>
+			<div style="font-size: 2.5em;margin-top:5px;" class="iconCmd#id#"></div>
           	<div>
 				<!-- Affichage Valeur -->
 					<span class='label label-default value label-state#id#'style="font-size: 11px;"></span><br/>
@@ -95,7 +95,7 @@
 						} else {
 							var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureID;
 						} 
-					$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImglogoLevel +'.'+ srcImglogo_T+'" '+srcImgSize+'>');
+					$('.cmd[data-cmd_uid=#uid#] .iconCmd#id#').html('<img src="'+srcImglogoLevel +'.'+ srcImglogo_T+'" '+srcImgSize+'>');
 				}
 					$('.cmd[data-cmd_uid=#uid#] .label-state#id#').html(State+' '+'#unite#');
 					$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
