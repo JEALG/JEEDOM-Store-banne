@@ -6,22 +6,18 @@
 		Mise à jour				: JAG 20190327 : Amélioration code Ajout variable pour définir l'extension du fichier (merci à fishes)
 		Mise à jour				: JAG 20190505 : Ajout durée "Derniere durée changement dernier etat" Merci @Salvialf pour le code
 	-->
-	<div class="row">
-		<center>
-			<div class="cmdName" id="cmdName#id#" style="font-weight: bold;font-size : 10px; #hideCmdName#;">#name_display# </div>
-			<div style="font-size: 2.5em;margin-top:5px;" class="iconCmd#id#"></div>
-          	<div>
-				<!-- Affichage Valeur -->
-					<span class='label label-default value label-state#id#'style="font-size: 11px;"></span><br/>
-          		<!-- Derniere durée changement dernier etat-->
-          			<span class='label label-default value label-time#id#'style="font-size: 10px;"></span><br/>
-				<!-- Historique -->
-					<div class="#hide_history# label label-default value" style="#displayHistory# font-size : 8px">
-						<span style='font-size : 8px' title="Min">#minHistoryValue##unite# | </span><span style='font-size : 8px' title="Max" class="tooltips">#maxHistoryValue##unite#</span> <i style='font-size : 8px' class="#tendance#"></i>
-					</div>			
-			</div>
-		</center>
-	</div>
+    <div class="title #hide_name#">
+        <div class="cmdName">#name_display#</div>
+    </div>
+    <div class="content-sm ">
+        <span class="iconCmd#id#"></span>
+    </div>
+    <div style="font-weight: bold;font-size : 10px;">
+        <span class="timeCmd#id#" ></span>
+    </div>
+    <div class="value">
+        <span class="value#id# timeCmd label label-default value"></span>
+    </div>
 </div>
 <script>
 	jeedom.cmd.update['#id#'] = function(_options){
@@ -87,34 +83,33 @@
 
 			// Update IMG + gestion erreur
 				if (srcPictureID == "error"){
-					$('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER +'.'+ srcImglogoER_T+'" '+srcImgSize+'>');
-				} else {
-					// Update en fonction level
-						if (srcImgLevel == 1 ) {
-							var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureIDinv;
-						} else {
-							var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureID;
-						} 
-					$('.cmd[data-cmd_uid=#uid#] .iconCmd#id#').html('<img src="'+srcImglogoLevel +'.'+ srcImglogo_T+'" '+srcImgSize+'>');
-				}
-					$('.cmd[data-cmd_uid=#uid#] .label-state#id#').html(State+' '+'#unite#');
-					$('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+                    $('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER +'.'+ srcImglogoER_T+'" '+srcImgSize+'>');
+                } else {
+                    // Update en fonction level
+                        if (srcImgLevel == 1 ) {
+                            var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureIDinv;
+                        } else {
+                            var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureID;
+                        } 
+                    $('.cmd[data-cmd_uid=#uid#] .iconCmd#id#').html('<img src="'+srcImglogoLevel +'.'+ srcImglogo_T+'" '+srcImgSize+'>');
+                }
+                $('.cmd[data-cmd_uid=#uid#] .value#id#').empty().append(_options.display_value+' '+'#unite#');
+                $('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
 
 		// Derniere durée changement dernier etat
 			//Merci @Salvialf pour le code
 			if (srcImglogoTime == "duree") {
-				jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .label-time#id#'));
+				jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
 			} else if (srcImglogoTime == "date") {
-				var srcdate = new Date(_options.valueDate);
-				var srcformat = $.datepicker.formatDate('D dd/mm', srcdate);
-				var srctime = "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes();
-				$('.cmd[data-cmd_id=#id#] .label-time#id#').empty().html(srcformat+'<br>'+srctime);
+				var srcdate 	= new Date(_options.valueDate);
+				var srcformat 	= $.datepicker.formatDate('D dd/mm', srcdate);
+				var srctime 	= "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes();
+				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srcformat+'<br>'+srctime);
 			} else if (srcImglogoTime == "heure") {
-				var srcdate = new Date(_options.valueDate);
-				var srctime = "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
-				$('.cmd[data-cmd_id=#id#] .label-time#id#').empty().html(srctime);
+				var srcdate 	= new Date(_options.valueDate);
+				var srctime 	= "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
+				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srctime);
 			};
-		
-	}
-		jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});      
+    }
+    jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});      
 </script>
