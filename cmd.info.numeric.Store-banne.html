@@ -22,6 +22,8 @@
 <script>
 	jeedom.cmd.update['#id#'] = function(_options){
 		// Options de personnalisation avec valeur par defaut
+            // Variable masque pour div historique ou maxmin
+                var srcvalue        = ('#masque_valeur#'!='#'+'masque_valeur#') ? "#masque_valeur#": "NO";
 			// Paramètre "sizehw" : à déclarer en pixels - 80 maxi
 				var srcImgHeight 	= (is_numeric('#sizeh#')) 	? parseFloat('#sizeh#') 	: 90;
 				var srcImgWidth		= (is_numeric('#sizew#')) 	? parseFloat('#sizew#') 	: 90;
@@ -110,6 +112,12 @@
 				var srctime 	= "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
 				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srctime);
 			};
+        //Masque des données
+            if (srcvalue =="NO") {
+                $("span.valuevisible").css("display","visible");
+            }else if (srcvalue =="YES") {
+                $("span.valuevisible").css("display","none");
+            }
     }
     jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});      
 </script>
