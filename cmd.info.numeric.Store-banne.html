@@ -114,9 +114,9 @@
 			};
         //Masque des données
             if (srcvalue =="NO") {
-                $("span.valuevisible").css("display","visible");
+                $("span.value#id#").css("display","visible");
             }else if (srcvalue =="YES") {
-                $("span.valuevisible").css("display","none");
+                $("span.value#id#").css("display","none");
             }
     }
     jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});      
