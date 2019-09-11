@@ -1,7 +1,7 @@
 <div style="padding:0;width:110px;min-height:118px;" class="cmd tooltips cmd-widget cursor container-fluid #history# " data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
  	<!-- Info Widget
 		Basé sur les widget de	: breizh33
-		Mise à jour				: JAG 20190907 : Normalisation nom images => Merci à mich0111
+		Mise à jour				: JAG 20190911 : Normalisation nom images => Merci à mich0111
 	-->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -30,7 +30,8 @@
 			// Affichage durée changement dernier etat
 				var srcImglogoTime = '#logoTime#';
 			// Paramétrage des images
-				var srcImgURL 		= 'plugins/widget/core/template/dashboard/cmd.info.numeric.Store-banne/';
+                var srcImgURL       = 'plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/store/';
+                var srcImgURL_ER    = 'plugins/widget/core/template/dashboard/cmd.action.other.Multi-action-Defaut/error/';
 			// Paramètrage du logo		  	  
 				var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "store_ext_pos";
 				var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";	
@@ -78,6 +79,7 @@
 						srcPictureIDinv = "0";
 					} else {
 						srcPictureID 	= "error";
+                        srcImgURL       = srcImgURL_ER;
 					}          
 
 			// Update IMG + gestion erreur
