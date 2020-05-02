@@ -1,7 +1,8 @@
 <div style="padding:0;width:110px;min-height:118px;" class="cmd tooltips cmd-widget cursor container-fluid #history# " data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
- 	<!-- Info Widget
-		Basé sur les widget de	: breizh33
-		Mise à jour				: JAG 20190918 : Migration uniquement pour core V4
+    <!-- Info Widget
+		Basé sur les widget de	    : breizh33
+		Widget pour le Core         : V4
+        Mise à jour	                : JAG 20200502 => Ajout Version Core
 	-->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -17,106 +18,112 @@
     </div>
 </div>
 <script>
-	jeedom.cmd.update['#id#'] = function(_options){
-		// Options de personnalisation avec valeur par defaut
-            // Variable masque pour div historique ou maxmin
-                var srcvalue        = ('#masque_valeur#'!='#'+'masque_valeur#') ? "#masque_valeur#": "NO";
-			// Paramètre "sizehw" : à déclarer en pixels - 80 maxi
-				var srcImgHeight 	= (is_numeric('#sizeh#')) 	? parseFloat('#sizeh#') 	: 90;
-				var srcImgWidth		= (is_numeric('#sizew#')) 	? parseFloat('#sizew#') 	: 90;
-				var srcImgSize 		= 'height='+srcImgHeight+'px width='+srcImgWidth+'px';
-			// Paramétrage Niveau
-				var srcImgLevel		= (is_numeric('#levelINV#')) 	? parseFloat('#levelINV#') 	: 0;	
-			// Affichage durée changement dernier etat
-				var srcImglogoTime = '#logoTime#';
-			// Paramétrage des images
-                var srcImgURL       = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/store/';
-                var srcImgURL_ER    = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/error/';
-			// Paramètrage du logo		  	  
-				var srcImglogo		= ('#logo#'!='#'+'logo#') ? "#logo#" : "st_banne_pos";
-				var srcImglogo_T 	= ('#logo_type#'!='#'+'logo_type#') ? "#logo_type#" : "png";	
-			// Paramètrage du logo Erreur	
-				var srcImglogoER	= ('#logo_error#'!='#'+'logo_error#') ? "#logo_error#" : "er_oups1";
-				var srcImglogoER_T 	= ('#logoER_type#'!='#'+'logoER_type#') ? "#logoER_type#" : "png";
-			// Variable Image
-				var srcPictureID;
-				var srcPictureIDinv;
-      
-			// Update
-				var State = parseFloat(_options.display_value);	
-					if (State == 0) {
-						srcPictureID 	= "0";
-						srcPictureIDinv = "100";
-					} else if (State > 0 && State <= 10) {
-						srcPictureID 	= "10";
-						srcPictureIDinv = "90";
-					} else if (State > 10 && State <= 20) {
-						srcPictureID 	= "20";
-						srcPictureIDinv = "80";
-					} else if (State > 20 && State <= 30) {
-						srcPictureID 	= "30";
-						srcPictureIDinv = "70";
-					} else if (State > 30 && State <= 40) {
-						srcPictureID 	= "40";
-						srcPictureIDinv = "60";
-					} else if (State > 40 && State <= 50) {
-						srcPictureID 	= "50";
-						srcPictureIDinv = "50";
-					} else if (State > 50 && State <= 60) {
-						srcPictureID 	= "60";
-						srcPictureIDinv = "40";
-					} else if (State > 60 && State <= 70) {
-						srcPictureID 	= "70";
-						srcPictureIDinv = "30";
-					} else if (State > 70 && State <= 80) {
-						srcPictureID 	= "80";
-						srcPictureIDinv = "20";
-					} else if (State > 80 && State <= 90) {
-						srcPictureID 	= "90";
-						srcPictureIDinv = "10";
-					} else if (State > 90 && State <= 100) {
-						srcPictureID 	= "100";
-						srcPictureIDinv = "0";
-					} else {
-						srcPictureID 	= "error";
-                        srcImgURL       = srcImgURL_ER;
-					}          
+    jeedom.cmd.update['#id#'] = function(_options) {
+        // Options de personnalisation avec valeur par defaut
+        // Variable masque pour div historique ou maxmin
+        var srcvalue = ('#masque_valeur#' != '#' + 'masque_valeur#') ? "#masque_valeur#" : "NO";
+        // Paramètre "sizehw" : à déclarer en pixels - 80 maxi
+        var srcImgHeight = (is_numeric('#sizeh#')) ? parseFloat('#sizeh#') : 90;
+        var srcImgWidth = (is_numeric('#sizew#')) ? parseFloat('#sizew#') : 90;
+        var srcImgSize = 'height=' + srcImgHeight + 'px width=' + srcImgWidth + 'px';
+        // Paramétrage Niveau
+        var srcImgLevel = (is_numeric('#levelINV#')) ? parseFloat('#levelINV#') : 0;
+        // Affichage durée changement dernier etat
+        var srcImglogoTime = '#logoTime#';
+        // Paramétrage des images
+        var srcImgURL = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/store/';
+        var srcImgURL_ER = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/error/';
+        // Paramètrage du logo
+        var srcImglogo = ('#logo#' != '#' + 'logo#') ? "#logo#" : "st_banne_pos";
+        var srcImglogo_T = ('#logo_type#' != '#' + 'logo_type#') ? "#logo_type#" : "png";
+        // Paramètrage du logo Erreur
+        var srcImglogoER = ('#logo_error#' != '#' + 'logo_error#') ? "#logo_error#" : "er_oups1";
+        var srcImglogoER_T = ('#logoER_type#' != '#' + 'logoER_type#') ? "#logoER_type#" : "png";
+        // Variable Image
+        var srcPictureID;
+        var srcPictureIDinv;
 
-			// Update IMG + gestion erreur
-				if (srcPictureID == "error"){
-                    $('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="'+srcImgURL +srcImglogoER +'.'+ srcImglogoER_T+'" '+srcImgSize+'>');
-                } else {
-                    // Update en fonction level
-                        if (srcImgLevel == 1 ) {
-                            var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureIDinv;
-                        } else {
-                            var srcImglogoLevel = srcImgURL + srcImglogo +srcPictureID;
-                        } 
-                    $('.cmd[data-cmd_uid=#uid#] .iconCmd#id#').html('<img src="'+srcImglogoLevel +'.'+ srcImglogo_T+'" '+srcImgSize+'>');
-                }
-                $('.cmd[data-cmd_uid=#uid#] .value#id#').empty().append(_options.display_value+' '+'#unite#');
-                $('.cmd[data-cmd_id=#id#]').attr('title','Valeur du '+_options.valueDate+', collectée le '+_options.collectDate);
+        // Update
+        var State = parseFloat(_options.display_value);
+        if (State == 0) {
+            srcPictureID = "0";
+            srcPictureIDinv = "100";
+        } else if (State > 0 && State <= 10) {
+            srcPictureID = "10";
+            srcPictureIDinv = "90";
+        } else if (State > 10 && State <= 20) {
+            srcPictureID = "20";
+            srcPictureIDinv = "80";
+        } else if (State > 20 && State <= 30) {
+            srcPictureID = "30";
+            srcPictureIDinv = "70";
+        } else if (State > 30 && State <= 40) {
+            srcPictureID = "40";
+            srcPictureIDinv = "60";
+        } else if (State > 40 && State <= 50) {
+            srcPictureID = "50";
+            srcPictureIDinv = "50";
+        } else if (State > 50 && State <= 60) {
+            srcPictureID = "60";
+            srcPictureIDinv = "40";
+        } else if (State > 60 && State <= 70) {
+            srcPictureID = "70";
+            srcPictureIDinv = "30";
+        } else if (State > 70 && State <= 80) {
+            srcPictureID = "80";
+            srcPictureIDinv = "20";
+        } else if (State > 80 && State <= 90) {
+            srcPictureID = "90";
+            srcPictureIDinv = "10";
+        } else if (State > 90 && State <= 100) {
+            srcPictureID = "100";
+            srcPictureIDinv = "0";
+        } else {
+            srcPictureID = "error";
+            srcImgURL = srcImgURL_ER;
+        }
 
-		// Derniere durée changement dernier etat
-			//Merci @Salvialf pour le code
-			if (srcImglogoTime == "duree") {
-				jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
-			} else if (srcImglogoTime == "date") {
-				var srcdate 	= new Date(_options.valueDate);
-				var srcformat 	= $.datepicker.formatDate('D dd/mm', srcdate);
-				var srctime 	= "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes();
-				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srcformat+' '+srctime);
-			} else if (srcImglogoTime == "heure") {
-				var srcdate 	= new Date(_options.valueDate);
-				var srctime 	= "à "+srcdate.getHours()+":"+(srcdate.getMinutes()<10?'0':'')+srcdate.getMinutes()+":"+(srcdate.getSeconds()<10?'0':'')+srcdate.getSeconds()+"";
-				$('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srctime);
-			};
-        //Masque des données
-            if (srcvalue =="NO") {
-                $("span.value#id#").css("display","visible");
-            }else if (srcvalue =="YES") {
-                $("span.value#id#").css("display","none");
+        // Update IMG + gestion erreur
+        if (srcPictureID == "error") {
+            $('.cmd[data-cmd_uid=#uid#] .iconCmd').html('<img src="' + srcImgURL + srcImglogoER + '.' + srcImglogoER_T + '" ' + srcImgSize + '>');
+        } else {
+            // Update en fonction level
+            if (srcImgLevel == 1) {
+                var srcImglogoLevel = srcImgURL + srcImglogo + srcPictureIDinv;
+            } else {
+                var srcImglogoLevel = srcImgURL + srcImglogo + srcPictureID;
             }
+            $('.cmd[data-cmd_uid=#uid#] .iconCmd#id#').html('<img src="' + srcImglogoLevel + '.' + srcImglogo_T + '" ' + srcImgSize + '>');
+        }
+        $('.cmd[data-cmd_uid=#uid#] .value#id#').empty().append(_options.display_value + ' ' + '#unite#');
+        $('.cmd[data-cmd_id=#id#]').attr('title', 'Valeur du ' + _options.valueDate + ', collectée le ' + _options.collectDate);
+
+        // Derniere durée changement dernier etat
+        //Merci @Salvialf pour le code
+        if (srcImglogoTime == "duree") {
+            jeedom.cmd.displayDuration(_options.valueDate, $('.cmd[data-cmd_id=#id#] .timeCmd#id#'));
+        } else if (srcImglogoTime == "date") {
+            var srcdate = new Date(_options.valueDate);
+            var srcformat = $.datepicker.formatDate('D dd/mm', srcdate);
+            var srctime = "à " + srcdate.getHours() + ":" + (srcdate.getMinutes() < 10 ? '0' : '') + srcdate.getMinutes();
+            $('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srcformat + ' ' + srctime);
+        } else if (srcImglogoTime == "heure") {
+            var srcdate = new Date(_options.valueDate);
+            var srctime = "à " + srcdate.getHours() + ":" + (srcdate.getMinutes() < 10 ? '0' : '') + srcdate.getMinutes() + ":" + (srcdate.getSeconds() < 10 ? '0' : '') + srcdate.getSeconds() + "";
+            $('.cmd[data-cmd_id=#id#] .timeCmd#id#').empty().html(srctime);
+        };
+        //Masque des données
+        if (srcvalue == "NO") {
+            $("span.value#id#").css("display", "visible");
+        } else if (srcvalue == "YES") {
+            $("span.value#id#").css("display", "none");
+        }
     }
-    jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'});      
+    jeedom.cmd.update['#id#']({
+        display_value: '#state#',
+        valueDate: '#valueDate#',
+        collectDate: '#collectDate#',
+        alertLevel: '#alertLevel#'
+    });
+
 </script>
