@@ -1,7 +1,8 @@
 <div style="padding:0;width:110px;min-height:118px;" class="cmd tooltips cmd-widget cursor container-fluid #history# " data-type="info" data-subtype="numeric" data-cmd_id="#id#" data-cmd_uid="#uid#" data-eqLogic_id="#eqLogic_id#" data-eqLogic_id="#eqLogic_id#" title="#collectDate#">
     <!-- Info Widget
-		Basé sur les widget de	: breizh33
-		Mise à jour				: JAG 20190918 : Migration uniquement pour core V4
+		Basé sur les widget de	    : breizh33
+		Widget pour le Core         : V4
+        Mise à jour	                : JAG 20200502 => Ajout Version Core
 	-->
     <div class="title #hide_name#">
         <div class="cmdName" style="#hideCmdName#">#name_display#</div>
@@ -32,10 +33,10 @@
         // Paramétrage des images
         var srcImgURL = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/store/';
         var srcImgURL_ER = 'data/customTemplates/dashboard/cmd.action.other.Multi-action-Defaut/error/';
-        // Paramètrage du logo		  	  
+        // Paramètrage du logo
         var srcImglogo = ('#logo#' != '#' + 'logo#') ? "#logo#" : "st_banne_pos";
         var srcImglogo_T = ('#logo_type#' != '#' + 'logo_type#') ? "#logo_type#" : "png";
-        // Paramètrage du logo Erreur	
+        // Paramètrage du logo Erreur
         var srcImglogoER = ('#logo_error#' != '#' + 'logo_error#') ? "#logo_error#" : "er_oups1";
         var srcImglogoER_T = ('#logoER_type#' != '#' + 'logoER_type#') ? "#logoER_type#" : "png";
         // Variable Image
@@ -124,4 +125,5 @@
         collectDate: '#collectDate#',
         alertLevel: '#alertLevel#'
     });
+
 </script>
